@@ -1,0 +1,1 @@
+My baseline chef cookbook for vagrant config.
