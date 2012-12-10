@@ -74,23 +74,23 @@ rbenv_gem "rails" do
   action :install
 end
 
-rbenv_gem "libv8" do
-	user target_user
-  rbenv_version target_ruby
-  action :install
-end
+# rbenv_gem "libv8" do
+# 	user target_user
+#   rbenv_version target_ruby
+#   action :install
+# end
 
-rbenv_gem "execjs" do
-	user target_user
-  rbenv_version target_ruby
-  action :install
-end
+# rbenv_gem "execjs" do
+# 	user target_user
+#   rbenv_version target_ruby
+#   action :install
+# end
 
-rbenv_gem "therubyracer" do
-	user target_user
-  rbenv_version target_ruby
-  action :install
-end
+# rbenv_gem "therubyracer" do
+# 	user target_user
+#   rbenv_version target_ruby
+#   action :install
+# end
 
 package "libpq-dev" do # for pg
   action :install
