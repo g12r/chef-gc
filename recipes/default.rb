@@ -8,12 +8,6 @@ execute "apt_update" do
   action :run
 end
 
-# this wants to run grub, which fucks all kinds of stuff up.
-# execute "apt_upgrade" do
-#   command "apt-get upgrade -y"
-#   action :run
-# end
-
 package "curl" do
   action :install
 end
@@ -74,24 +68,6 @@ rbenv_gem "rails" do
   action :install
 end
 
-# rbenv_gem "libv8" do
-# 	user target_user
-#   rbenv_version target_ruby
-#   action :install
-# end
-
-# rbenv_gem "execjs" do
-# 	user target_user
-#   rbenv_version target_ruby
-#   action :install
-# end
-
-# rbenv_gem "therubyracer" do
-# 	user target_user
-#   rbenv_version target_ruby
-#   action :install
-# end
-
 package "libpq-dev" do # for pg
   action :install
 end
@@ -101,14 +77,3 @@ rbenv_gem "pg" do
 	rbenv_version target_ruby
   action :install
 end
-
-# execute "rbenv_rehash" do
-# 	user #{target_user}
-# 	command "rbenv rehash"
-# 	action :run
-# end
-
-# rbenv_rehash do
-# 	name "rails"
-# 	user "vagrant"
-# end
