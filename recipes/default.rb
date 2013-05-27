@@ -1,18 +1,11 @@
 include_recipe "apt"
 
 target_user = "vagrant"
-target_ruby = "1.9.3-p327"
-
-execute "apt_update" do
-  command "apt-get update -y"
-  action :run
-end
-
-# this wants to run grub, which fucks all kinds of stuff up.
-# execute "apt_upgrade" do
-#   command "apt-get upgrade -y"
-#   action :run
-# end
+ruby_193 = "1.9.3-p392"
+ruby_200 = "2.0.0-p0"
+# works was 193, keep as is for now -- should work in a future rails/ruby combo
+default_ruby = ruby_193
+# default_ruby = ruby_200
 
 package "curl" do
   action :install
@@ -59,38 +52,41 @@ execute "add_rbenv_init_to_zsrhc" do
 	action :run
 end
 
-rbenv_ruby target_ruby do
+# if we need to diverge from dotfiles, we could modify export RBENV_VERSION to what we need
+
+execute "update_gem" do
+	command "gem update --system"
+	action :run
+end
+
+rbenv_ruby ruby_193 do
 	user target_user
   action :install
 end
 
-rbenv_global target_ruby do
+rbenv_ruby ruby_200 do
+	user target_user
+  action :install
+end
+
+rbenv_global default_ruby do
   user target_user
 end
 
+# shell doesn't work, not sure how necessary this is
+# execute "rbenv_shell" do
+# 	user target_user
+# 	command "rbenv shell #{default_ruby}"
+# 	action :run
+# end
+
 rbenv_gem "rails" do
 	user target_user
-  rbenv_version target_ruby
+  rbenv_version default_ruby
+  # working
+  # version "3.2.12"
   action :install
 end
-
-# rbenv_gem "libv8" do
-# 	user target_user
-#   rbenv_version target_ruby
-#   action :install
-# end
-
-# rbenv_gem "execjs" do
-# 	user target_user
-#   rbenv_version target_ruby
-#   action :install
-# end
-
-# rbenv_gem "therubyracer" do
-# 	user target_user
-#   rbenv_version target_ruby
-#   action :install
-# end
 
 package "libpq-dev" do # for pg
   action :install
@@ -98,17 +94,17 @@ end
 
 rbenv_gem "pg" do
 	user target_user
-	rbenv_version target_ruby
+	rbenv_version default_ruby
   action :install
 end
 
-# execute "rbenv_rehash" do
-# 	user #{target_user}
-# 	command "rbenv rehash"
-# 	action :run
-# end
+execute "apt_update" do
+  command "apt-get update -y"
+  action :run
+end
 
-# rbenv_rehash do
-# 	name "rails"
-# 	user "vagrant"
-# end
+execute "apt_upgrade" do
+  command "apt-get upgrade -y"
+  action :run
+end
+
