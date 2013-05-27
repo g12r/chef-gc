@@ -1,20 +1,11 @@
 include_recipe "apt"
 
 target_user = "vagrant"
-<<<<<<< HEAD
 ruby_193 = "1.9.3-p392"
 ruby_200 = "2.0.0-p0"
 # works was 193, keep as is for now -- should work in a future rails/ruby combo
 default_ruby = ruby_193
 # default_ruby = ruby_200
-=======
-target_ruby = "1.9.3-p327"
-
-execute "apt_update" do
-  command "apt-get update -y"
-  action :run
-end
->>>>>>> d551fef9495e11dd40eb47e36f8b4e0e2f1ea320
 
 package "curl" do
   action :install
@@ -78,7 +69,6 @@ rbenv_ruby ruby_200 do
   action :install
 end
 
-<<<<<<< HEAD
 rbenv_global default_ruby do
   user target_user
 end
@@ -98,8 +88,6 @@ rbenv_gem "rails" do
   action :install
 end
 
-=======
->>>>>>> d551fef9495e11dd40eb47e36f8b4e0e2f1ea320
 package "libpq-dev" do # for pg
   action :install
 end
@@ -109,7 +97,6 @@ rbenv_gem "pg" do
 	rbenv_version default_ruby
   action :install
 end
-<<<<<<< HEAD
 
 execute "apt_update" do
   command "apt-get update -y"
@@ -121,5 +108,3 @@ execute "apt_upgrade" do
   action :run
 end
 
-=======
->>>>>>> d551fef9495e11dd40eb47e36f8b4e0e2f1ea320
