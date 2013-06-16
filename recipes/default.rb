@@ -1,7 +1,7 @@
 include_recipe "apt"
 
 target_user = "vagrant"
-ruby_193 = "1.9.3-p392"
+ruby_193 = "1.9.3-p429"
 ruby_200 = "2.0.0-p0"
 # works was 193, keep as is for now -- should work in a future rails/ruby combo
 default_ruby = ruby_193
